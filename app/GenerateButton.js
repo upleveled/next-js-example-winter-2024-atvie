@@ -9,8 +9,6 @@ export default function GenerateButton() {
 
   const router = useRouter();
 
-  console.log('Hello client');
-
   return (
     <button
       className={styles.generateButton}
