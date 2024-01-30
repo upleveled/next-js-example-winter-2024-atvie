@@ -1,0 +1,27 @@
+{
+  "name": "next-js-example-winter-2024-atvie",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "sass": "^1.70.0",
+    "sharp": "^0.33.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "eslint-config-upleveled": "^7.5.0",
+    "stylelint": "^16.2.0",
+    "stylelint-config-upleveled": "^1.0.7",
+    "typescript": "^5.3.3"
+  }
+}
