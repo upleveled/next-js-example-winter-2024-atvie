@@ -1,0 +1,28 @@
+.cookieBanner {
+  background-color: var(--color-layout);
+  padding: 0.3125rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  transition: all 0.5s;
+  z-index: 1;
+
+  &.closed {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.button:hover {
+  background-color: rgb(0, 31, 57);
+  color: white;
+}
