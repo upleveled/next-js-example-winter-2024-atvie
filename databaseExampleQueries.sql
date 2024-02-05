@@ -25,8 +25,8 @@ VALUES
 SELECT * FROM animals;
 
 
-CREATE DATABASE winter_2024;
-CREATE USER winter_2024 WITH ENCRYPTED PASSWORD 'winter_2024';
-GRANT ALL PRIVILEGES ON DATABASE winter_2024 TO winter_2024;
-\connect winter_2024;
-CREATE SCHEMA winter_2024 AUTHORIZATION winter_2024;
+CREATE DATABASE winter_migration_2024;
+CREATE USER winter_migration_2024 WITH ENCRYPTED PASSWORD 'winter_migration_2024';
+GRANT ALL PRIVILEGES ON DATABASE winter_migration_2024 TO winter_migration_2024;
+\connect winter_migration_2024;
+CREATE SCHEMA winter_migration_2024 AUTHORIZATION winter_migration_2024;

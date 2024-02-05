@@ -7,9 +7,11 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "migrate": "ley --require tsx/cjs"
   },
   "dependencies": {
+    "@upleveled/ley": "^0.8.2",
     "dotenv": "^16.4.1",
     "next": "14.1.0",
     "postgres": "^3.4.3",
@@ -18,7 +20,8 @@
     "sass": "^1.70.0",
     "secure-json-parse": "^2.7.0",
     "server-only": "^0.0.1",
-    "sharp": "^0.33.2"
+    "sharp": "^0.33.2",
+    "tsx": "^4.7.0"
   },
   "devDependencies": {
     "@ts-safeql/eslint-plugin": "^2.0.3",
