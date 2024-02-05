@@ -1,6 +1,5 @@
--- This file is only my notes, changing
--- this file doesn't change anything in
--- the database
+-- This file is only my notes, changing this file doesn't change
+-- anything in the database
 
 -- Create animals table
 CREATE TABLE animals (
