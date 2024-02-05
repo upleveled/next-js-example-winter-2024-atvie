@@ -28,5 +28,5 @@ SELECT * FROM animals;
 CREATE DATABASE winter_migration_2024;
 CREATE USER winter_migration_2024 WITH ENCRYPTED PASSWORD 'winter_migration_2024';
 GRANT ALL PRIVILEGES ON DATABASE winter_migration_2024 TO winter_migration_2024;
-\connect winter_migration_2024;
+-- psql: \connect winter_migration_2024;
 CREATE SCHEMA winter_migration_2024 AUTHORIZATION winter_migration_2024;
