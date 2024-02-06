@@ -7,11 +7,11 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "migrate": "NODE_OPTIONS='--import tsx' ley",
+    "migrate": "ley --require tsx/cjs",
     "start": "next start"
   },
   "dependencies": {
-    "@upleveled/ley": "^0.8.3",
+    "@upleveled/ley": "^0.8.5",
     "dotenv": "^16.4.1",
     "next": "14.1.0",
     "postgres": "^3.4.3",

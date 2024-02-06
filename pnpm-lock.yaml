@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@upleveled/ley':
-    specifier: ^0.8.3
-    version: 0.8.3
+    specifier: ^0.8.5
+    version: 0.8.5
   dotenv:
     specifier: ^16.4.1
     version: 16.4.1
@@ -1492,8 +1492,8 @@ packages:
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
     dev: true
 
-  /@upleveled/ley@0.8.3:
-    resolution: {integrity: sha512-V8ZC722aqMjJeQr6n5un5xi275+mdXSYQafTc7htZvTVon6woLOtQIylfzGM0m4ukBU3elI/iuPX9CZrRtUS9A==}
+  /@upleveled/ley@0.8.5:
+    resolution: {integrity: sha512-XIJ08AIEKcwABZ6Xb0rS6mFEhMMskAakBKJdwHCniRbFjXtZaoqf1DGPGhrYNKKpIAGZlSjh8v0aOn+rAjHA/g==}
     engines: {node: '>= 8'}
     hasBin: true
     dependencies:
