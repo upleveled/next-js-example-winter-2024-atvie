@@ -2,6 +2,9 @@
 
 The Next.js Example - Winter 2024 is a project that demonstrates how to use Next.js to build a full-stack web application. It is part of the curriculum for the [UpLeveled Web Development Bootcamp](https://upleveled.io/web-development-bootcamp).
 
+<img width="1440" alt="Screenshot 2024-02-06 at 12 13 52" src="https://github.com/upleveled/next-js-example-winter-2024-atvie/assets/74430629/1f3b5ca5-4883-41aa-9ada-2b2658eb6267">
+<img width="1440" alt="Screenshot 2024-02-06 at 12 13 26" src="https://github.com/upleveled/next-js-example-winter-2024-atvie/assets/74430629/45f32134-109b-43e2-a441-7bfb8a47642c">
+
 # Technologies
 
 - Next.js
@@ -70,8 +73,3 @@ psql -U <user name> <database name>
 ```bash
 sudo -u <user name> psql -U <user name> <database name>
 ```
-
-# UI Interface
-
-<img width="1440" alt="Screenshot 2024-02-06 at 12 13 52" src="https://github.com/upleveled/next-js-example-winter-2024-atvie/assets/74430629/1f3b5ca5-4883-41aa-9ada-2b2658eb6267">
-<img width="1440" alt="Screenshot 2024-02-06 at 12 13 26" src="https://github.com/upleveled/next-js-example-winter-2024-atvie/assets/74430629/45f32134-109b-43e2-a441-7bfb8a47642c">
