@@ -44,7 +44,7 @@ Once you have connected, run the following to create the database:
 CREATE DATABASE <database name>;
 CREATE USER <user name> WITH ENCRYPTED PASSWORD '<user password>';
 GRANT ALL PRIVILEGES ON DATABASE <database name> TO <user name>;
-\connect <database name>;
+\connect <database name>
 CREATE SCHEMA <schema name> AUTHORIZATION <user name>;
 ```
 
