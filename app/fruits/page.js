@@ -52,7 +52,10 @@ export default function FruitsPage() {
       <h1>Fruits</h1>
       {fruitsWithComments.map((fruit) => {
         return (
-          <div key={`fruit-id-${fruit.id}`}>
+          <div
+            key={`fruit-id-${fruit.id}`}
+            data-test-id={`fruit-name-${fruit.name}`}
+          >
             <Link href={`/fruits/${fruit.id}`}>
               <h2>
                 {fruit.icon} {fruit.name}
