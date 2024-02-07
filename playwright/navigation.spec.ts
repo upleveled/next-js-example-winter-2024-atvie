@@ -30,7 +30,7 @@ test('navigation test', async ({ page }) => {
   await expect(page.getByText('These are my animals')).toBeVisible();
 
   const animals = [
-    { id: 1, firstName: 'Lucia', type: 'lion', accessory: 'Car' },
+    { id: 1, firstName: 'Lucia', type: 'Lion', accessory: 'Car' },
     { id: 2, firstName: 'Macca', type: 'Dog', accessory: 'Comb' },
     { id: 3, firstName: 'Jojo', type: 'Dodo', accessory: 'Dojo' },
     { id: 4, firstName: 'Flo', type: 'Parrot', accessory: 'Carrot' },
