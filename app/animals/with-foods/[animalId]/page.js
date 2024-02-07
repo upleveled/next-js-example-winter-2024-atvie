@@ -1,8 +1,10 @@
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import {
   getAnimalsWithFoodsInsecure,
   getAnimalWithFoodsInsecure,
 } from '../../../../database/animals';
+import { reduceAnimalsWithFoods } from '../../../../util/dataStructures';
 
 export default async function AnimalFoodPage(props) {
   const animalsWithFoods = await getAnimalsWithFoodsInsecure(
@@ -13,21 +15,9 @@ export default async function AnimalFoodPage(props) {
     props.params.animalId,
   );
 
-  const animal = animalsWithFoods[0];
+  if (!animalsWithFoods[0]) notFound();
 
-  const animalWithFoods = {
-    id: animal.animalId,
-    firstName: animal.animalFirstName,
-    type: animal.animalType,
-    accessory: animal.animalAccessory,
-    animalFoods: animalsWithFoods.map((animalWithFood) => {
-      return {
-        id: animalWithFood.animalFoodId,
-        name: animalWithFood.animalFoodName,
-        type: animalWithFood.animalFoodType,
-      };
-    }),
-  };
+  const animalWithFoods = reduceAnimalsWithFoods(animalsWithFoods);
 
   return (
     <div>

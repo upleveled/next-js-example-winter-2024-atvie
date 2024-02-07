@@ -9,6 +9,8 @@ The Next.js Example - Winter 2024 is a project that demonstrates how to use Next
 
 - Next.js
 - Postgres.js
+- Jest
+- Playwright
 
 ## Database Setup
 
