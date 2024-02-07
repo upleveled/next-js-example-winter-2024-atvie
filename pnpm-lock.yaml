@@ -8,9 +8,9 @@ dependencies:
   '@upleveled/ley':
     specifier: ^0.8.5
     version: 0.8.5
-  dotenv:
-    specifier: ^16.4.1
-    version: 16.4.1
+  dotenv-safe:
+    specifier: ^9.0.0
+    version: 9.0.0(dotenv@16.4.1)
   next:
     specifier: 14.1.0
     version: 14.1.0(@babel/core@7.23.9)(react-dom@18.2.0)(react@18.2.0)(sass@1.70.0)
@@ -55,6 +55,9 @@ devDependencies:
   '@ts-safeql/eslint-plugin':
     specifier: ^2.0.3
     version: 2.0.3(eslint@8.56.0)(libpg-query@15.0.2)(typescript@5.3.3)
+  '@types/dotenv-safe':
+    specifier: ^8.1.5
+    version: 8.1.5
   '@types/node':
     specifier: ^20.11.16
     version: 20.11.16
@@ -1755,6 +1758,13 @@ packages:
       '@babel/types': 7.23.9
     dev: true
 
+  /@types/dotenv-safe@8.1.5:
+    resolution: {integrity: sha512-E8z+Z0+yE8eEZ8BcMnb3I31fV3ROxobooqEDRBoQDAs4lb0c9X6Va6P6z+svj/USxw4R7TErcfEuW0tk7ymaPA==}
+    dependencies:
+      '@types/node': 20.11.16
+      dotenv: 8.6.0
+    dev: true
+
   /@types/eslint@8.56.2:
     resolution: {integrity: sha512-uQDwm1wFHmbBbCZCqAlq6Do9LYwByNZHWzXppSnay9SuwJ+VRbjkbLABer54kcPnMSlG6Fdiy2yaFXm/z9Z5gw==}
     dependencies:
@@ -2983,10 +2993,23 @@ packages:
       webidl-conversions: 7.0.0
     dev: true
 
+  /dotenv-safe@9.0.0(dotenv@16.4.1):
+    resolution: {integrity: sha512-/M8292ReX1jMGLVf/jsAVQzQ0a453C3CJVVyqfoelV+78u9DeluqJU5HbwyQsUCzA4AV5sm52xClVgZWetX+fQ==}
+    peerDependencies:
+      dotenv: '>= 8.2.0'
+    dependencies:
+      dotenv: 16.4.1
+    dev: false
+
   /dotenv@16.4.1:
     resolution: {integrity: sha512-CjA3y+Dr3FyFDOAMnxZEGtnW9KBR2M0JvvUtXNW+dYJL5ROWxP9DUHCwgFqpMk0OXCc0ljhaNTr2w/kutYIcHQ==}
     engines: {node: '>=12'}
     dev: false
+
+  /dotenv@8.6.0:
+    resolution: {integrity: sha512-IrPdXQsk2BbzvCBGBOTmmSH5SodmqZNt4ERAZDmW4CT+tL8VtvinqywuANaFu4bOMWki16nqf0e4oC0QIaDr/g==}
+    engines: {node: '>=10'}
+    dev: true
 
   /eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
