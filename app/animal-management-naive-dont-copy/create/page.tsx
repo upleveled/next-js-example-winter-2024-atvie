@@ -1,7 +1,16 @@
 import { notFound } from 'next/navigation';
 import { createAnimalInsecure } from '../../../database/animals';
 
-export default async function NaiveCreateAnimalPage(props) {
+type Props = {
+  searchParams: {
+    firstName: string;
+    type: string;
+    accessory: string;
+    birthDate: string;
+  };
+};
+
+export default async function NaiveCreateAnimalPage(props: Props) {
   const animal = await createAnimalInsecure({
     firstName: props.searchParams.firstName,
     type: props.searchParams.type,

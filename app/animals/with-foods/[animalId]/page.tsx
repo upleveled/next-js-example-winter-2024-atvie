@@ -6,16 +6,23 @@ import {
 } from '../../../../database/animals';
 import { reduceAnimalsWithFoods } from '../../../../util/dataStructures';
 
-export default async function AnimalFoodPage(props) {
+type Props = {
+  params: {
+    animalId: string;
+  };
+};
+
+export default async function AnimalFoodPage(props: Props) {
   const animalsWithFoods = await getAnimalsWithFoodsInsecure(
-    props.params.animalId,
+    Number(props.params.animalId),
   );
 
   const animalWithFoodJsonAgg = await getAnimalWithFoodsInsecure(
-    props.params.animalId,
+    Number(props.params.animalId),
   );
 
   if (!animalsWithFoods[0]) notFound();
+  if (!animalWithFoodJsonAgg) notFound();
 
   const animalWithFoods = reduceAnimalsWithFoods(animalsWithFoods);
 
