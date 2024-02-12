@@ -77,3 +77,15 @@ jobs:
         with:
           name: playwright-screenshots-videos
           path: playwright/test-results/
+  cd:
+    name: Deploy to Fly.io
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: ci
+    if: github.ref == 'refs/heads/main'
+    env:
+      FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: flyctl deploy --remote-only

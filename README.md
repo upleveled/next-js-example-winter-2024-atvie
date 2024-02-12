@@ -75,3 +75,8 @@ psql -U <user name> <database name>
 ```bash
 sudo -u <user name> psql -U <user name> <database name>
 ```
+
+## Deployment
+
+- Fly.io
+- Docker
