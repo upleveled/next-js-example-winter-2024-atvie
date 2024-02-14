@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import {
   deleteAnimalInsecure,
   getAnimalInsecure,
@@ -24,7 +24,7 @@ type AnimalResponseBodyGet =
 // WARNING: You probably don't need this, because you can just do
 // a database query directly in your Server Component
 export async function GET(
-  request: NextResponse,
+  request: NextRequest,
   { params }: AnimalParams,
 ): Promise<NextResponse<AnimalResponseBodyGet>> {
   const animal = await getAnimalInsecure(Number(params.animalId));
@@ -52,7 +52,7 @@ type AnimalResponseBodyPut =
 // WARNING: You probably don't need this, because you can just do
 // a database query directly in your Server Component
 export async function PUT(
-  request: NextResponse,
+  request: NextRequest,
   { params }: AnimalParams,
 ): Promise<NextResponse<AnimalResponseBodyPut>> {
   const requestBody = await request.json();
@@ -118,7 +118,7 @@ type AnimalResponseBodyDelete =
 // WARNING: You probably don't need this, because you can just do
 // a database query directly in your Server Component
 export async function DELETE(
-  request: NextResponse,
+  request: NextRequest,
   { params }: AnimalParams,
 ): Promise<NextResponse<AnimalResponseBodyDelete>> {
   const animal = await deleteAnimalInsecure(Number(params.animalId));
