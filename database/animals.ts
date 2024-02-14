@@ -51,6 +51,8 @@ export const getAnimalsInsecure = cache(async () => {
       *
     FROM
       animals
+    ORDER BY
+      id
   `;
 
   return animals;

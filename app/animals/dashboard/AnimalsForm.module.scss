@@ -1,0 +1,51 @@
+.dashboard {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  padding: 1.5rem;
+  grid-gap: 1rem;
+
+  @media (max-width: 990px) {
+    grid-template-columns: 1fr;
+  }
+
+  table {
+    width: 100%;
+    font-size: 0.875rem;
+    // Removes the default border between cells
+    border-collapse: collapse;
+  }
+
+  thead {
+    text-align: left;
+  }
+
+  th,
+  td {
+    padding: 1rem;
+  }
+}
+
+.buttonCell {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.selectedItem {
+  background-color: var(--color-layout);
+}
+
+.animalForm {
+  padding: 1rem;
+
+  @media (max-width: 990px) {
+    // Display form above table on smaller screens
+    order: -1;
+  }
+
+  // Sticky position is disabled on the grid container, so we use
+  // a child div to enable and apply the sticky positioning
+  > div {
+    position: sticky;
+    top: 0;
+  }
+}
