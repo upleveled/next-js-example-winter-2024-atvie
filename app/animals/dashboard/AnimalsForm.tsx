@@ -116,7 +116,7 @@ export default function AnimalsForm(props: Props) {
           </table>
         </div>
 
-        <div className={styles.animalForm}>
+        <div className={styles.animalsForm}>
           <div>
             <h2>{id ? 'Edit Animal' : 'Add Animal'}</h2>
             <form
