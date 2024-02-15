@@ -52,7 +52,7 @@ export async function POST(
 
     return NextResponse.json(
       {
-        error: 'You need to send an animal object',
+        error: 'Request does not contain animal object',
         errorIssues: result.error.issues,
       },
       {
@@ -74,7 +74,7 @@ export async function POST(
   if (!newAnimal) {
     return NextResponse.json(
       {
-        error: 'Error creating the new animal',
+        error: 'Animal not created or access denied creating animal',
       },
       { status: 500 },
     );

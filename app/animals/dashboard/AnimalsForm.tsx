@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Animal } from '../../../migrations/00000-createTableAnimals';
+import ErrorMessage from '../../ErrorMessage';
 import styles from './AnimalsForm.module.scss';
 
 type Props = {
@@ -16,11 +17,12 @@ export default function AnimalsForm(props: Props) {
   const [type, setType] = useState('');
   const [accessory, setAccessory] = useState('');
   const [birthDate, setBirthDate] = useState(new Date());
+  const [errorMessage, setErrorMessage] = useState('');
 
   const router = useRouter();
 
-  // Reset form states to default values so that the form is cleared
-  // after an add, edit or delete action
+  // Reset form states to default values so that the form is
+  // cleared after an add, edit or delete action
   function resetFormStates() {
     setId(0);
     setFirstName('');
@@ -61,8 +63,9 @@ export default function AnimalsForm(props: Props) {
                         setId(animal.id);
                         setFirstName(animal.firstName);
                         setType(animal.type);
-                        // Default to an empty string to avoid errors with
-                        // passing null to input values
+                        // Default to an empty string to avoid
+                        // errors with passing null to input
+                        // values
                         setAccessory(animal.accessory || '');
                         setBirthDate(animal.birthDate);
                       }}
@@ -71,12 +74,36 @@ export default function AnimalsForm(props: Props) {
                     </button>
                     <button
                       onClick={async () => {
-                        await fetch(`/api/animals/${animal.id}`, {
-                          method: 'DELETE',
-                        });
+                        const response = await fetch(
+                          `/api/animals/${animal.id}`,
+                          {
+                            method: 'DELETE',
+                          },
+                        );
+
+                        setErrorMessage('');
+
+                        if (!response.ok) {
+                          let newErrorMessage = 'Error deleting the animal';
+
+                          try {
+                            const body = await response.json();
+                            newErrorMessage = body.error;
+                          } catch (error) {
+                            // Don't fail if response JSON body
+                            // cannot be parsed
+                          }
+
+                          // TODO: Use toast instead of showing
+                          // this below creation / update form
+                          setErrorMessage(newErrorMessage);
+                          return;
+                        }
+
                         router.refresh();
 
-                        // Reset form states if deleting an animal after editing it
+                        // Reset form states if deleting an
+                        // animal after editing it
                         resetFormStates();
                       }}
                     >
@@ -97,7 +124,7 @@ export default function AnimalsForm(props: Props) {
                 event.preventDefault();
 
                 if (id) {
-                  await fetch(`/api/animals/${id}`, {
+                  const response = await fetch(`/api/animals/${id}`, {
                     method: 'PUT',
                     body: JSON.stringify({
                       firstName,
@@ -109,8 +136,26 @@ export default function AnimalsForm(props: Props) {
                       'Content-Type': 'application/json',
                     },
                   });
+
+                  setErrorMessage('');
+
+                  if (!response.ok) {
+                    let newErrorMessage = 'Error updating the animal';
+
+                    try {
+                      const body = await response.json();
+                      newErrorMessage = body.error;
+                    } catch (error) {
+                      console.log('err', error);
+                      // Don't fail if response JSON body cannot
+                      // be parsed
+                    }
+
+                    setErrorMessage(newErrorMessage);
+                    return;
+                  }
                 } else {
-                  await fetch('/api/animals', {
+                  const response = await fetch('/api/animals', {
                     method: 'POST',
                     body: JSON.stringify({
                       firstName,
@@ -122,6 +167,23 @@ export default function AnimalsForm(props: Props) {
                       'Content-Type': 'application/json',
                     },
                   });
+
+                  setErrorMessage('');
+
+                  if (!response.ok) {
+                    let newErrorMessage = 'Error creating the animal';
+
+                    try {
+                      const body = await response.json();
+                      newErrorMessage = body.error;
+                    } catch (error) {
+                      // Don't fail if response JSON body cannot
+                      // be parsed
+                    }
+
+                    setErrorMessage(newErrorMessage);
+                    return;
+                  }
                 }
 
                 router.refresh();
@@ -161,6 +223,8 @@ export default function AnimalsForm(props: Props) {
               </label>
               <button>{id ? 'Save Changes' : 'Add Animal'}</button>
             </form>
+
+            <ErrorMessage>{errorMessage}</ErrorMessage>
           </div>
         </div>
       </div>

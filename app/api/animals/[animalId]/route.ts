@@ -75,7 +75,7 @@ export async function PUT(
 
     return NextResponse.json(
       {
-        error: 'You need to send an animal object',
+        error: 'Request does not contain animal object',
         errorIssues: result.error.issues,
       },
       {
@@ -98,7 +98,7 @@ export async function PUT(
   if (!updatedAnimal) {
     return NextResponse.json(
       {
-        error: 'Error updating the new animal',
+        error: 'Animal not found or access denied updating animal',
       },
       { status: 500 },
     );
@@ -126,7 +126,7 @@ export async function DELETE(
   if (!animal) {
     return NextResponse.json(
       {
-        error: "Animal doesn't exist",
+        error: 'Animal not found or access denied deleting animal',
       },
       { status: 404 },
     );

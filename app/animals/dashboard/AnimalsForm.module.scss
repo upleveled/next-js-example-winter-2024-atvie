@@ -48,4 +48,17 @@
     position: sticky;
     top: 0;
   }
+
+  form {
+    margin-bottom: 1rem;
+
+    label,
+    input {
+      margin-top: 0.3rem;
+    }
+
+    button {
+      margin-top: 0.7rem;
+    }
+  }
 }
