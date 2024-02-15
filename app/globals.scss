@@ -3,12 +3,8 @@
   --color-layout: rgb(222, 208, 182);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-}
-
 body {
+  margin: 0;
   font-family: -apple-system, 'system-ui', 'Segoe UI', 'Noto Sans', Helvetica,
     Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   background: var(--color-background);
