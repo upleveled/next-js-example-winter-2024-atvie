@@ -60,7 +60,7 @@ devDependencies:
     version: 14.2.1(react-dom@18.2.0)(react@18.2.0)
   '@ts-safeql/eslint-plugin':
     specifier: ^2.0.3
-    version: 2.0.3(eslint@8.56.0)(libpg-query@15.0.2)(typescript@5.3.3)
+    version: 2.0.3(eslint@8.56.0)(libpg-query@15.0.3-wasm.0.1)(typescript@5.3.3)
   '@types/dotenv-safe':
     specifier: ^8.1.5
     version: 8.1.5
@@ -83,8 +83,8 @@ devDependencies:
     specifier: ^29.7.0
     version: 29.7.0
   libpg-query:
-    specifier: ^15.0.2
-    version: 15.0.2
+    specifier: ^15.0.3-wasm.0.1
+    version: 15.0.3-wasm.0.1
   prettier:
     specifier: ^3.2.5
     version: 3.2.5
@@ -483,6 +483,12 @@ packages:
       postcss-selector-parser: ^6.0.13
     dependencies:
       postcss-selector-parser: 6.0.15
+    dev: true
+
+  /@emnapi/runtime@0.43.1:
+    resolution: {integrity: sha512-Q5sMc4Z4gsD4tlmlyFu+MpNAwpR7Gv2errDhVJ+SOhNjWcx8UTqy+hswb8L31RfC8jBvDgcnT87l3xI2w08rAg==}
+    dependencies:
+      tslib: 2.6.2
     dev: true
 
   /@emnapi/runtime@0.45.0:
@@ -1679,7 +1685,7 @@ packages:
     engines: {node: '>= 10'}
     dev: true
 
-  /@ts-safeql/eslint-plugin@2.0.3(eslint@8.56.0)(libpg-query@15.0.2)(typescript@5.3.3):
+  /@ts-safeql/eslint-plugin@2.0.3(eslint@8.56.0)(libpg-query@15.0.3-wasm.0.1)(typescript@5.3.3):
     resolution: {integrity: sha512-sMvq8hjBY5leWhq5/j+bJ432aWJO1RGaQup3v9FtfCwgvkgWudSaJ7PoDe1SU4kO2bolkdj4ZQPexRc5MTZTrQ==}
     peerDependencies:
       libpg-query: '>=13.2.5'
@@ -1691,7 +1697,7 @@ packages:
       chokidar: 3.5.3
       esbuild: 0.17.17
       fp-ts: 2.16.2
-      libpg-query: 15.0.2
+      libpg-query: 15.0.3-wasm.0.1
       pg-connection-string: 2.5.0
       postgres: 3.4.3
       recast: 0.22.0
@@ -3397,7 +3403,7 @@ packages:
     engines: {node: ^14.18.0 || >=16.0.0}
     peerDependencies:
       eslint: '*'
-      eslint-plugin-import: 2.29.0
+      eslint-plugin-import: '*'
     dependencies:
       debug: 4.3.4
       enhanced-resolve: 5.15.0
@@ -5240,12 +5246,13 @@ packages:
       type-check: 0.4.0
     dev: true
 
-  /libpg-query@15.0.2:
-    resolution: {integrity: sha512-Nj+gQJPbvthDCfLb+NEcnhfUUW76N1otzD8xBxmr6kY4292GWJwhANse3SwGFGn5xl76WWAVW+IM7Wk5uyb9hg==}
+  /libpg-query@15.0.3-wasm.0.1:
+    resolution: {integrity: sha512-FWCvNK7IDdh8H9SZu9PyXRxvZ569ZP2E8npsXgw0qlIjiwHpJUvQrzZDlOD9QwE8vhny8BU4rQHv5FwLz24fdQ==}
     requiresBuild: true
     dependencies:
+      '@emnapi/runtime': 0.43.1
       '@mapbox/node-pre-gyp': 1.0.11
-      node-addon-api: 1.7.2
+      node-addon-api: 7.1.0
       node-gyp: 8.4.1
     transitivePeerDependencies:
       - bluebird
@@ -5589,8 +5596,9 @@ packages:
       - babel-plugin-macros
     dev: false
 
-  /node-addon-api@1.7.2:
-    resolution: {integrity: sha512-ibPK3iA+vaY1eEjESkQkM0BbCqFOaZMiXRTtdB0u7b4djtY6JnsjvPdUHVMg6xQt3B8fpTTWHI9A+ADjM9frzg==}
+  /node-addon-api@7.1.0:
+    resolution: {integrity: sha512-mNcltoe1R8o7STTegSOHdnJNN7s5EUvhoS7ShnTHDyOSd+8H+UdWODq6qSv67PjC8Zc5JRT8+oLAMCr0SIXw7g==}
+    engines: {node: ^16 || ^18 || >= 20}
     dev: true
 
   /node-fetch@2.7.0:
