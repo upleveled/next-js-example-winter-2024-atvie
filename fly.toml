@@ -1,7 +1,6 @@
 app = "next-js-example-winter-2024-atvie"
 primary_region = "otp"
 
-# Apps without volume: Comment out the [mounts] configuration below
 [mounts]
   source = "postgres"
   destination = "/postgres-volume"
