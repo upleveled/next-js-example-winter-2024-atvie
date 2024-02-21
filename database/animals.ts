@@ -50,7 +50,7 @@ export const getAnimalsInsecure = cache(async () => {
     SELECT
       *
     FROM
-      animals
+      animalss
     ORDER BY
       id
   `;
