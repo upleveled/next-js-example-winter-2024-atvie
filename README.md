@@ -82,3 +82,31 @@ sudo -u <user name> psql -U <user name> <database name>
 
 - Fly.io
 - Docker
+
+## Authentication
+
+Some pages are protected with sessions and can only be accessed by authenticated users. User needs to login with username and password to be authenticated. Authenticated users can access the protected pages and perform CRUD operations on the animals.
+
+```
+export type User = {
+  id: number;
+  username: string;
+};
+
+export type UserWithPasswordHash = User & {
+  passwordHash: string;
+};
+
+type Error = {
+  message: string;
+};
+
+```
+
+```
+- /api/(auth)/register
+  - POST   => User   | Error[]   (create user)
+
+- /api/(auth)/login
+  - POST   => User   | Error[]   (login user)
+```

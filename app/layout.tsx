@@ -30,6 +30,11 @@ export default function RootLayout({ children }: { children: ReactNode }) {
               <Link href="/animals">Animals</Link>
               <Link href="/animals/dashboard">Dashboard</Link>
               <Link href="/fruits">Fruits</Link>
+
+              <div>
+                <Link href="/register">Register</Link>
+                <Link href="/login">Login</Link>
+              </div>
             </nav>
 
             {Math.floor(Math.random() * 10)}
