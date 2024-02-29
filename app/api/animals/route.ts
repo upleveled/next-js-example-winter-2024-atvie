@@ -1,8 +1,6 @@
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import {
-  createAnimalInsecure,
-  getAnimalsInsecure,
-} from '../../../database/animals';
+import { createAnimal, getAnimalsInsecure } from '../../../database/animals';
 import {
   Animal,
   animalSchema,
@@ -64,12 +62,23 @@ export async function POST(
   // Try this first:
   // await createAnimalInsecure(result.data);
 
-  const newAnimal = await createAnimalInsecure({
-    firstName: result.data.firstName,
-    type: result.data.type,
-    accessory: result.data.accessory || null,
-    birthDate: result.data.birthDate,
-  });
+  // const newAnimal = await createAnimalInsecure({
+  //   firstName: result.data.firstName,
+  //   type: result.data.type,
+  //   accessory: result.data.accessory || null,
+  //   birthDate: result.data.birthDate,
+  // });
+
+  const sessionTokenCookie = cookies().get('sessionToken');
+
+  const newAnimal =
+    sessionTokenCookie &&
+    (await createAnimal(sessionTokenCookie.value, {
+      firstName: result.data.firstName,
+      type: result.data.type,
+      accessory: result.data.accessory || null,
+      birthDate: result.data.birthDate,
+    }));
 
   if (!newAnimal) {
     return NextResponse.json(

@@ -1,8 +1,9 @@
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import {
-  deleteAnimalInsecure,
+  deleteAnimal,
   getAnimalInsecure,
-  updateAnimalInsecure,
+  updateAnimal,
 } from '../../../../database/animals';
 import {
   Animal,
@@ -86,14 +87,26 @@ export async function PUT(
 
   // Try this first:
   // await createAnimalInsecure(result.data);
+  // Now the animal update from the dashboard requires the user to be logged in
+  // const updatedAnimal = await updateAnimalInsecure({
+  //   id: Number(params.animalId),
+  //   firstName: result.data.firstName,
+  //   type: result.data.type,
+  //   accessory: result.data.accessory || null,
+  //   birthDate: result.data.birthDate,
+  // });
 
-  const updatedAnimal = await updateAnimalInsecure({
-    id: Number(params.animalId),
-    firstName: result.data.firstName,
-    type: result.data.type,
-    accessory: result.data.accessory || null,
-    birthDate: result.data.birthDate,
-  });
+  const sessionTokenCookie = cookies().get('sessionToken');
+
+  const updatedAnimal =
+    sessionTokenCookie &&
+    (await updateAnimal(sessionTokenCookie.value, {
+      id: Number(params.animalId),
+      firstName: result.data.firstName,
+      type: result.data.type,
+      accessory: result.data.accessory || null,
+      birthDate: result.data.birthDate,
+    }));
 
   if (!updatedAnimal) {
     return NextResponse.json(
@@ -121,7 +134,14 @@ export async function DELETE(
   request: NextRequest,
   { params }: AnimalParams,
 ): Promise<NextResponse<AnimalResponseBodyDelete>> {
-  const animal = await deleteAnimalInsecure(Number(params.animalId));
+  // Now the animal delete from the dashboard requires the user to be logged in
+  // const animal = await deleteAnimalInsecure(Number(params.animalId));
+
+  const sessionTokenCookie = cookies().get('sessionToken');
+
+  const animal =
+    sessionTokenCookie &&
+    (await deleteAnimal(sessionTokenCookie.value, Number(params.animalId)));
 
   if (!animal) {
     return NextResponse.json(
