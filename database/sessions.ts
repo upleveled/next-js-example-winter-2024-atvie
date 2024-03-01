@@ -1,12 +1,13 @@
 import { cache } from 'react';
-import { Session } from '../migrations/00007-createTableSessions';
+import { Session } from '../migrations/00009-alterTableSessions';
 import { sql } from './connect';
 
 export const getValidSession = cache(async (token: string) => {
-  const [session] = await sql<Pick<Session, 'id' | 'token'>[]>`
+  const [session] = await sql<Pick<Session, 'id' | 'token' | 'csrfSecret'>[]>`
     SELECT
       sessions.id,
-      sessions.token
+      sessions.token,
+      sessions.csrf_secret
     FROM
       sessions
     WHERE
@@ -18,19 +19,21 @@ export const getValidSession = cache(async (token: string) => {
 });
 
 export const createSessionInsecure = cache(
-  async (userId: number, token: string) => {
+  async (userId: number, token: string, csrfSecret: string) => {
     const [session] = await sql<Session[]>`
       INSERT INTO
-        sessions (user_id, token)
+        sessions (user_id, token, csrf_secret)
       VALUES
         (
           ${userId},
-          ${token}
+          ${token},
+          ${csrfSecret}
         )
       RETURNING
         sessions.id,
         sessions.token,
-        sessions.user_id
+        sessions.user_id,
+        sessions.csrf_secret
     `;
 
     await sql`

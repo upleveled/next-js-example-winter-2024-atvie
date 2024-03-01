@@ -15,6 +15,7 @@ export const animalSchema = z.object({
   accessory: z.string().optional(),
   // accessory: z.string().nullable(),
   birthDate: z.coerce.date(),
+  csrfToken: z.string(),
 });
 
 export async function up(sql: Sql) {

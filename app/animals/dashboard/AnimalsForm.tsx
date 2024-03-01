@@ -9,6 +9,7 @@ import styles from './AnimalsForm.module.scss';
 
 type Props = {
   animals: Animal[];
+  csrfToken: string;
 };
 
 export default function AnimalsForm(props: Props) {
@@ -34,7 +35,8 @@ export default function AnimalsForm(props: Props) {
   return (
     <>
       <h1>Animal Dashboard</h1>
-
+      CSRF: token changing on every page render: <code />
+      {props.csrfToken}
       <div className={styles.dashboard}>
         <div>
           <table>
@@ -162,6 +164,7 @@ export default function AnimalsForm(props: Props) {
                       type,
                       accessory,
                       birthDate,
+                      csrfToken: props.csrfToken,
                     }),
                     headers: {
                       'Content-Type': 'application/json',

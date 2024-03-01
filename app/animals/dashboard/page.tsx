@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { getAnimals } from '../../../database/animals';
 import { getValidSession } from '../../../database/sessions';
+import { createTokenFromSecret } from '../../../util/csrf';
 import AnimalsForm from './AnimalsForm';
 
 export const metadata = {
@@ -25,7 +26,10 @@ export default async function AnimalsPage() {
 
   if (!session) redirect('/login?returnTo=/animals/dashboard');
 
+  // CSRF: Create a new CSRF token for the session
+  const csrfToken = createTokenFromSecret(session.csrfSecret);
+
   // 4. If the sessionToken cookie is valid, allow access to dashboard page
   const animals = await getAnimals(session.token);
-  return <AnimalsForm animals={animals} />;
+  return <AnimalsForm animals={animals} csrfToken={csrfToken} />;
 }

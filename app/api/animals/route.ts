@@ -1,10 +1,12 @@
 import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
 import { createAnimal, getAnimalsInsecure } from '../../../database/animals';
+import { getValidSession } from '../../../database/sessions';
 import {
   Animal,
   animalSchema,
 } from '../../../migrations/00000-createTableAnimals';
+import { validateTokenAgainstSecret } from '../../../util/csrf';
 
 type AnimalsResponseBodyGet = {
   animals: Animal[];
@@ -71,14 +73,34 @@ export async function POST(
 
   const sessionTokenCookie = cookies().get('sessionToken');
 
-  const newAnimal =
-    sessionTokenCookie &&
-    (await createAnimal(sessionTokenCookie.value, {
-      firstName: result.data.firstName,
-      type: result.data.type,
-      accessory: result.data.accessory || null,
-      birthDate: result.data.birthDate,
-    }));
+  const session =
+    sessionTokenCookie && (await getValidSession(sessionTokenCookie.value));
+
+  if (!session) {
+    return NextResponse.json(
+      {
+        error: 'not a valid session',
+      },
+      { status: 401 },
+    );
+  }
+
+  // validate a csrf token against a secret/seed in the sessions table
+  if (!validateTokenAgainstSecret(session.csrfSecret, result.data.csrfToken)) {
+    return NextResponse.json(
+      {
+        error: 'not a valid csrf token',
+      },
+      { status: 401 },
+    );
+  }
+
+  const newAnimal = await createAnimal(sessionTokenCookie.value, {
+    firstName: result.data.firstName,
+    type: result.data.type,
+    accessory: result.data.accessory || null,
+    birthDate: result.data.birthDate,
+  });
 
   if (!newAnimal) {
     return NextResponse.json(

@@ -9,6 +9,7 @@ import {
 } from '../../../../database/users';
 import { userSchema } from '../../../../migrations/00006-createTableUsers';
 import { secureCookieOptions } from '../../../../util/cookies';
+import { createCsrfSecret } from '../../../../util/csrf';
 
 export type LoginResponseBodyPost =
   | {
@@ -75,8 +76,15 @@ export async function POST(
   // 5. Create a token
   const token = crypto.randomBytes(100).toString('base64');
 
+  // CSRF. Create a new CSRF Secret for the session
+  const csrfSecret = createCsrfSecret();
+
   // 6. Create the session record
-  const session = await createSessionInsecure(userWithPasswordHash.id, token);
+  const session = await createSessionInsecure(
+    userWithPasswordHash.id,
+    token,
+    csrfSecret,
+  );
 
   if (!session) {
     return NextResponse.json(
