@@ -52,6 +52,7 @@ export default async function RootLayout({
               <div>
                 {user ? (
                   <>
+                    <Link href="/notes">Notes</Link>
                     <Link href={`/profile/${user.username}`}>
                       {user.username}
                     </Link>
