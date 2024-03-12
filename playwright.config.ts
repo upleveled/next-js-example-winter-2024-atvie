@@ -8,6 +8,12 @@ const config: PlaywrightTestConfig = {
     stdout: 'pipe',
   },
   testMatch: '**/playwright/**',
+  // Fail tests if test.only() found on CI
+  forbidOnly: !!process.env.CI,
+  // Run tests in files also in parallel
+  fullyParallel: true,
+  // Disable all parallelization on CI
+  workers: process.env.CI ? 1 : undefined,
   reporter: process.env.CI
     ? 'github'
     : [['html', { outputFolder: 'playwright/report/' }]],
