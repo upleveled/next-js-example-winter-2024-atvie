@@ -14,6 +14,7 @@ declare module globalThis {
 function connectOneTimeToDatabase() {
   if (!('postgresSqlClient' in globalThis)) {
     globalThis.postgresSqlClient = postgres({
+      ssl: Boolean(process.env.POSTGRES_URL),
       transform: {
         ...postgres.camel,
         undefined: null,
