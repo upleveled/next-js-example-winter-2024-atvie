@@ -16,9 +16,9 @@ The Next.js Example - Winter 2024 is a project that demonstrates how to use Next
 
 ## Database Setup
 
-Copy the `.env.example` file to a new file called `.env` (ignored from Git) and fill in the necessary information.
+If you don't have PostgreSQL installed yet, follow the instructions from the PostgreSQL step in [UpLeveled's System Setup Instructions](https://github.com/upleveled/system-setup/blob/master/readme.md).
 
-Follow the instructions from the PostgreSQL step in [UpLeveled's System Setup Instructions](https://github.com/upleveled/system-setup/blob/master/readme.md).
+Copy the `.env.example` file to a new file called `.env` (ignored from Git) and fill in the necessary information.
 
 Then, connect to the built-in `postgres` database as administrator in order to create the database:
 
