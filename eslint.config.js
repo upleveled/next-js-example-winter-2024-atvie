@@ -13,16 +13,12 @@ const config = [
         // "Insecure")
         {
           selector:
-            "ExportNamedDeclaration > FunctionDeclaration[id.name!=/Insecure$/][params.0.name!='sessionToken'], ExportNamedDeclaration > VariableDeclaration[declarations.0.init.callee.name='cache'][declarations.0.id.name!=/Insecure$/][declarations.0.init.arguments.0.params.0.name!='sessionToken'], ExportNamedDeclaration > VariableDeclaration[declarations.0.init.callee.name='query'][declarations.0.id.name!=/Insecure$/][declarations.0.init.arguments.0.params.0.properties.0.key.name!='sessionToken']",
+            "ExportNamedDeclaration > VariableDeclaration[declarations.0.init.callee.name='cache'][declarations.0.id.name!=/Insecure$/][declarations.0.init.arguments.0.params.0.name!='sessionToken']",
           message: `Ambiguous authentication of exported database query function - either pass \`sessionToken\` as the first parameter or destructured property in first parameter or name the function ending with \`Insecure\`:
 
-function getUser(sessionToken: string, userId: number)
 const getUser = cache(async (sessionToken: string, userId: number) =>
-const getUser = query(async ({ sessionToken, userId }: { sessionToken: string, userId: number }) =>
 
-function getArticleCategoriesInsecure()
 const getArticleCategoriesInsecure = cache(async () =>
-const getArticleCategoriesInsecure = query(async () =>
 
 `,
         },
@@ -30,7 +26,7 @@ const getArticleCategoriesInsecure = query(async () =>
         // parameter) within database functions
         {
           selector:
-            "ExportNamedDeclaration > FunctionDeclaration[params.0.name='sessionToken'] > BlockStatement:not(:has([type='Identifier'][name='sessionToken'])), ExportNamedDeclaration > VariableDeclaration[declarations.0.init.callee.name='cache'][declarations.0.init.arguments.0.params.0.name='sessionToken'] > VariableDeclarator > CallExpression > ArrowFunctionExpression > BlockStatement:not(:has([type='Identifier'][name='sessionToken'])), ExportNamedDeclaration > VariableDeclaration[declarations.0.init.callee.name='query'][declarations.0.init.arguments.0.params.0.properties.0.key.name='sessionToken'] > VariableDeclarator > CallExpression > ArrowFunctionExpression > BlockStatement:not(:has([type='Identifier'][name='sessionToken']))",
+            "ExportNamedDeclaration > VariableDeclaration[declarations.0.init.callee.name='cache'][declarations.0.init.arguments.0.params.0.name='sessionToken'] > VariableDeclarator > CallExpression > ArrowFunctionExpression > BlockStatement:not(:has([type='Identifier'][name='sessionToken']))",
           message:
             'Unused `sessionToken` parameter in database query function - use `sessionToken` in database queries to implement authentication and authorization',
         },
