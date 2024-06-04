@@ -89,7 +89,7 @@ export default function AnimalsForm(props: Props) {
                           try {
                             const body = await response.json();
                             newErrorMessage = body.error;
-                          } catch (error) {
+                          } catch {
                             // Don't fail if response JSON body
                             // cannot be parsed
                           }
@@ -176,7 +176,7 @@ export default function AnimalsForm(props: Props) {
                     try {
                       const body = await response.json();
                       newErrorMessage = body.error;
-                    } catch (error) {
+                    } catch {
                       // Don't fail if response JSON body cannot
                       // be parsed
                     }

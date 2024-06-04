@@ -48,14 +48,14 @@ import { sql } from './connect';
 // Secure database queries start here
 // All queries not marked `Insecure` use session tokens to authenticate the user
 
-export const getAnimals = cache(async (token: string) => {
+export const getAnimals = cache(async (sessionToken: string) => {
   const animals = await sql<Animal[]>`
     SELECT
       animals.*
     FROM
       animals
       INNER JOIN sessions ON (
-        sessions.token = ${token}
+        sessions.token = ${sessionToken}
         AND sessions.expiry_timestamp > now()
       )
   `;
@@ -63,7 +63,7 @@ export const getAnimals = cache(async (token: string) => {
 });
 
 export const createAnimal = cache(
-  async (token: string, newAnimal: Omit<Animal, 'id'>) => {
+  async (sessionToken: string, newAnimal: Omit<Animal, 'id'>) => {
     const [animal] = await sql<Animal[]>`
       INSERT INTO
         animals (
@@ -80,7 +80,7 @@ export const createAnimal = cache(
           FROM
             sessions
           WHERE
-            token = ${token}
+            token = ${sessionToken}
             AND sessions.expiry_timestamp > now()
         )
       RETURNING
@@ -92,7 +92,7 @@ export const createAnimal = cache(
 );
 
 export const updateAnimal = cache(
-  async (token: string, updatedAnimal: Animal) => {
+  async (sessionToken: string, updatedAnimal: Animal) => {
     const [animal] = await sql<Animal[]>`
       UPDATE animals
       SET
@@ -103,7 +103,7 @@ export const updateAnimal = cache(
       FROM
         sessions
       WHERE
-        sessions.token = ${token}
+        sessions.token = ${sessionToken}
         AND sessions.expiry_timestamp > now()
         AND animals.id = ${updatedAnimal.id}
       RETURNING
@@ -113,11 +113,11 @@ export const updateAnimal = cache(
   },
 );
 
-export const deleteAnimal = cache(async (token: string, id: number) => {
+export const deleteAnimal = cache(async (sessionToken: string, id: number) => {
   const [animal] = await sql<Animal[]>`
     DELETE FROM animals USING sessions
     WHERE
-      sessions.token = ${token}
+      sessions.token = ${sessionToken}
       AND sessions.expiry_timestamp > now()
       AND animals.id = ${id}
     RETURNING

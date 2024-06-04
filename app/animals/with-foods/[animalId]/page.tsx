@@ -17,12 +17,12 @@ export default async function AnimalFoodPage(props: Props) {
     Number(props.params.animalId),
   );
 
-  const animalWithFoodJsonAgg = await getAnimalWithFoodsInsecure(
+  const animalWithFoodsArray = await getAnimalWithFoodsInsecure(
     Number(props.params.animalId),
   );
 
   if (!animalsWithFoods[0]) notFound();
-  if (!animalWithFoodJsonAgg) notFound();
+  if (!animalWithFoodsArray) notFound();
 
   const animalWithFoods = reduceAnimalsWithFoods(animalsWithFoods);
 
@@ -55,23 +55,23 @@ export default async function AnimalFoodPage(props: Props) {
       <br />
       <br />
       <h1>
-        {animalWithFoodJsonAgg.animalFirstName} (using data transformation in
-        SQL using json_agg)
+        {animalWithFoodsArray.animalFirstName} (using data transformation in SQL
+        using json_agg)
       </h1>
       <Image
-        src={`/images/${animalWithFoodJsonAgg.animalFirstName.toLowerCase()}.png`}
-        alt={`A picture of ${animalWithFoodJsonAgg.animalFirstName}`}
+        src={`/images/${animalWithFoodsArray.animalFirstName.toLowerCase()}.png`}
+        alt={`A picture of ${animalWithFoodsArray.animalFirstName}`}
         width={200}
         height={200}
       />
       <p>
-        This is a {animalWithFoodJsonAgg.animalType} carrying a{' '}
-        {animalWithFoodJsonAgg.animalAccessory}
+        This is a {animalWithFoodsArray.animalType} carrying a{' '}
+        {animalWithFoodsArray.animalAccessory}
       </p>
       <br />
       Who likes:
       <ul>
-        {animalWithFoodJsonAgg.animalFoods.map((animalFood) => {
+        {animalWithFoodsArray.animalFoods.map((animalFood) => {
           return (
             <li key={`animal-with-food-${animalFood.name}-${animalFood.id}`}>
               {animalFood.name}
