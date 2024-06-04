@@ -2,14 +2,14 @@ import { cache } from 'react';
 import { Note } from '../migrations/00008-createTableNotes';
 import { sql } from './connect';
 
-export const getNotes = cache(async (token: string) => {
+export const getNotes = cache(async (sessionToken: string) => {
   const notes = await sql<Note[]>`
     SELECT
       notes.*
     FROM
       notes
       INNER JOIN sessions ON (
-        sessions.token = ${token}
+        sessions.token = ${sessionToken}
         AND notes.user_id = sessions.user_id
         AND sessions.expiry_timestamp > now()
       )
@@ -17,14 +17,14 @@ export const getNotes = cache(async (token: string) => {
   return notes;
 });
 
-export const getNote = cache(async (token: string, noteId: number) => {
+export const getNote = cache(async (sessionToken: string, noteId: number) => {
   const [note] = await sql<Note[]>`
     SELECT
       notes.*
     FROM
       notes
       INNER JOIN sessions ON (
-        sessions.token = ${token}
+        sessions.token = ${sessionToken}
         AND notes.user_id = sessions.user_id
         AND sessions.expiry_timestamp > now()
       )
@@ -35,7 +35,7 @@ export const getNote = cache(async (token: string, noteId: number) => {
 });
 
 export const createNote = cache(
-  async (token: string, title: string, textContent: string) => {
+  async (sessionToken: string, title: string, textContent: string) => {
     const [note] = await sql<Note[]>`
       INSERT INTO
         notes (user_id, title, text_content) (
@@ -46,7 +46,7 @@ export const createNote = cache(
           FROM
             sessions
           WHERE
-            token = ${token}
+            token = ${sessionToken}
             AND sessions.expiry_timestamp > now()
         )
       RETURNING

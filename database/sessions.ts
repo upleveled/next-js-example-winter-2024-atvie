@@ -2,7 +2,7 @@ import { cache } from 'react';
 import { Session } from '../migrations/00007-createTableSessions';
 import { sql } from './connect';
 
-export const getValidSession = cache(async (token: string) => {
+export const getValidSession = cache(async (sessionToken: string) => {
   const [session] = await sql<Pick<Session, 'id' | 'token'>[]>`
     SELECT
       sessions.id,
@@ -10,7 +10,7 @@ export const getValidSession = cache(async (token: string) => {
     FROM
       sessions
     WHERE
-      sessions.token = ${token}
+      sessions.token = ${sessionToken}
       AND sessions.expiry_timestamp > now()
   `;
 
@@ -43,13 +43,13 @@ export const createSessionInsecure = cache(
   },
 );
 
-export const deleteSession = cache(async (token: string) => {
+export const deleteSession = cache(async (sessionToken: string) => {
   // 'Pick' is a TS utility type that picks specified properties
   // from a type and excluding the rest
   const [session] = await sql<Pick<Session, 'id' | 'token'>[]>`
     DELETE FROM sessions
     WHERE
-      sessions.token = ${token}
+      sessions.token = ${sessionToken}
     RETURNING
       sessions.id,
       sessions.token
