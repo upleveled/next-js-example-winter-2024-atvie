@@ -1,5 +1,4 @@
 import { Sql } from 'postgres';
-import { Food } from './00002-createTableFoods';
 
 export type AnimalsFoods = {
   animalId: number;
@@ -11,8 +10,6 @@ export type AnimalsFoods = {
   animalFoodType: string | null;
 };
 
-export type JsonAgg = Food[];
-
 export type AnimalWithFoods = {
   animalId: number;
   animalFirstName: string;
@@ -23,14 +20,6 @@ export type AnimalWithFoods = {
     name: string | null;
     type: string | null;
   }[];
-};
-
-export type Test = {
-  animalId: number;
-  animalFirstName: string;
-  animalType: string;
-  animalAccessory: string | null;
-  animalFoods: JsonAgg;
 };
 
 export async function up(sql: Sql) {
