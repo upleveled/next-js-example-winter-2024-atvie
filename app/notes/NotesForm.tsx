@@ -63,7 +63,7 @@ export default function NotesForm(props: Props) {
                   try {
                     const body = await response.json();
                     newErrorMessage = body.error;
-                  } catch (error) {
+                  } catch {
                     // Don't fail if response JSON body
                     // cannot be parsed
                   }
