@@ -18,7 +18,11 @@ export type AnimalWithFoods = {
   animalFirstName: string;
   animalType: string;
   animalAccessory: string | null;
-  animalFoods: JsonAgg;
+  animalFoods: {
+    id: number | null;
+    name: string | null;
+    type: string | null;
+  }[];
 };
 
 export type Test = {
